@@ -17,36 +17,122 @@ PAYTABLE = {
     "4": {3: 40, 4: 80, 5: 150},
     "6": {3: 30, 4: 40, 5: 60},
     "7": {3: 20, 4: 30, 5: 40},
-    "8": {3: 20, 4: 30, 5: 40},
-    "9": {3: 20, 4: 30, 5: 40},
+    "8": {3: 10, 4: 15, 5: 30},
+    "9": {3: 5, 4: 10, 5: 15},
 }
 
 
 # Normal reel distribution per reel
-NORMAL_DISTRIBUTION = {
-    "Wild": 1,
-    "Scatter": 1,
-    "2": 4,
-    "3": 5,
-    "4": 6,
-    "6": 8,
-    "7": 8,
-    "8": 8,
-    "9": 9,
-}
-
+NORMAL_DISTRIBUTIONS = [
+    {
+        "Wild": 0,
+        "Scatter": 1,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "6": 4,
+        "7": 10,
+        "8": 10,
+        "9": 10,
+    },  # Reel 1
+    {
+        "Wild": 2,
+        "Scatter": 2,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "6": 5,
+        "7": 8,
+        "8": 10,
+        "9": 10,
+    },  # Reel 2
+    {
+        "Wild": 1,
+        "Scatter": 2,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "6": 8,
+        "7": 8,
+        "8": 8,
+        "9": 8,
+    },  # Reel 3
+    {
+        "Wild": 1,
+        "Scatter": 1,
+        "2": 5,
+        "3": 5,
+        "4": 5,
+        "6": 8,
+        "7": 9,
+        "8": 8,
+        "9": 8,
+    },  # Reel 4
+    {
+        "Wild": 2,
+        "Scatter": 2,
+        "2": 7,
+        "3": 6,
+        "4": 6,
+        "6": 10,
+        "7": 10,
+        "8": 12,
+        "9": 11,
+    },  # Reel 5
+]
 # Free-spin reel distribution per reel
-FS_DISTRIBUTION = {
-    "Wild": 2,
-    "2": 4,
-    "3": 5,
-    "4": 6,
-    "6": 8,
-    "7": 8,
-    "8": 8,
-    "9": 9,
-}
-
+FS_DISTRIBUTIONS = [
+    {  # Reel 1
+        "Wild": 4,
+        "2": 3,
+        "3": 3,
+        "4": 3,
+        "6": 9,
+        "7": 9,
+        "8": 10,
+        "9": 9,
+    },
+    {  # Reel 2
+        "Wild": 5,
+        "2": 3,
+        "3": 3,
+        "4": 2,
+        "6": 8,
+        "7": 9,
+        "8": 10,
+        "9": 10,
+    },
+    {  # Reel 3
+        "Wild": 6,
+        "2": 2,
+        "3": 3,
+        "4": 3,
+        "6": 8,
+        "7": 8,
+        "8": 10,
+        "9": 10,
+    },
+    {  # Reel 4
+        "Wild": 5,
+        "2": 3,
+        "3": 2,
+        "4": 3,
+        "6": 9,
+        "7": 8,
+        "8": 10,
+        "9": 10,
+    },
+    {  # Reel 5
+        "Wild": 4,
+        "2": 3,
+        "3": 3,
+        "4": 3,
+        "6": 9,
+        "7": 9,
+        "8": 9,
+        "9": 10,
+    },
+]
 # 10 paylines using row index: 0=top, 1=middle, 2=bottom
 PAYLINES = [
     [1, 1, 1, 1, 1],  # middle
@@ -75,12 +161,13 @@ def build_reel(distribution):
     return reel
 
 
-def build_reels(distribution):
-    return [build_reel(distribution) for _ in range(REELS)]
+def build_reels(distributions):
+    return [build_reel(distribution) for distribution in distributions]
 
 
-NORMAL_REELS = build_reels(NORMAL_DISTRIBUTION)
-FS_REELS = build_reels(FS_DISTRIBUTION)
+NORMAL_REELS = build_reels(NORMAL_DISTRIBUTIONS)
+
+FS_REELS = build_reels(FS_DISTRIBUTIONS)
 
 
 def spin_grid(reels):
